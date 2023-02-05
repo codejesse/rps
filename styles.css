@@ -1,0 +1,29 @@
+body {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.round-result {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.game-div {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.game-div button {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}

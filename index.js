@@ -1,3 +1,9 @@
+// const rockBtn = document.getElementById('rock')
+// const paperBtn = document.getElementById('paper')
+// const scissorsBtn = document.getElementById('scissors')
+const btn = document.querySelectorAll('button')
+const resultMessage = document.getElementById('round-result')
+
 let options = ['rock', 'paper', 'scissors']
 let playerScore = 0;
 let computerScore = 0;
@@ -7,6 +13,17 @@ let roundWinner = ''
 function getComputerChoice(arr) {
     let random = Math.floor(Math.random() * arr.length)
     return arr[random]
+}
+
+
+//write a function to handle playerchoice
+function playerChoice() {
+    btn.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            console.log(button.value)
+            return button.value
+        })
+    })
 }
 
 function playround(playerSelection, computerSelection) {
@@ -35,21 +52,41 @@ function playround(playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = prompt('Enter value')
+const playerSelection = playerChoice()
 const computerSelection = getComputerChoice(options)
 console.log(playround(playerSelection, computerSelection))
 
-//figure out how to create the rounds
+
+
+
+//figure out how to create the rounds --- done
 function game(playerSelection, computerSelection) {
-    //write code to loop 5 times to make a round 
-    //if the playerScore > computerScore declare player the winner else the computer
+    //write code to loop 5 times to make a round --- done
+    //if the playerScore > computerScore declare player the winner else the computer --- done 
     let i = 0
     do {
-        const playerSelection = prompt('Enter value')
+        let playerSelection = playerChoice()
         const computerSelection = getComputerChoice(options)
+        if (roundWinner === 'computer wins!') {
+            playerScore++
+        } else if (roundWinner === 'player wins!') {
+            computerScore++
+        }
         playround(playerSelection, computerSelection)
         i++;
     }
     while (i < 5)
+    console.log(`Player score: ${playerScore}`)
+    console.log(`Computer score: ${computerScore}`)
+    if (playerScore > computerScore) {
+        console.log('The player wins this round!')
+        resultMessage.innerHTML = 'The player wins this round!'
+    } else if (computerScore > playerScore) {
+        console.log('Ai is taking over very soon 🙂')
+        resultMessage.innerHTML = 'Ai is taking over very soon 🙂'
+    } else if (computerScore === playerScore) {
+        console.log('Tie 👔')
+        resultMessage.innerHTML = "It's a Tie 👔"
+    }
 }
 game(playerSelection, computerSelection)
