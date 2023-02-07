@@ -69,7 +69,7 @@ function roundScore() {
         if (playerScore > computerScore) {
             console.log('The player wins this round!')
             resultMessage.innerHTML = 'The player wins this round!'
-        } else if (computerScore > playerScore) {
+        } else if (playerScore < computerScore) {
             console.log('Ai is taking over very soon 🙂')
             resultMessage.innerHTML = 'Ai is taking over very soon 🙂'
         } else if (computerScore === playerScore) {
