@@ -1,0 +1,47 @@
+body {
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+.round-result {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.game-div {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+.game-div button {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.round-winner {
+    text-align: center;
+    border: 1px solid salmon;
+    margin: auto;
+    width: fit-content;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.scores {
+    display: flex;
+    justify-content: center;
+    flex-direction: row-reverse;
+    justify-content: space-around;
+    border: 1px solid red;
+    font-size: 20px;
+}

@@ -1,3 +1,12 @@
+// const rockBtn = document.getElementById('rock')
+// const paperBtn = document.getElementById('paper')
+// const scissorsBtn = document.getElementById('scissors')
+const btn = document.querySelectorAll('button')
+const resultMessage = document.getElementById('round-result')
+const playerResult = document.getElementById('player-score')
+const computerResult = document.getElementById('computer-score')
+const player_choice = document.getElementById('player-choice')
+
 let options = ['rock', 'paper', 'scissors']
 let playerScore = 0;
 let computerScore = 0;
@@ -9,12 +18,18 @@ function getComputerChoice(arr) {
     return arr[random]
 }
 
+
+//write a function to handle playerchoice
+btn.forEach(button => { button.addEventListener('click', playerChoice) })
+
+
 function playround(playerSelection, computerSelection) {
     //work on it here
     console.log(`Player: ${playerSelection}`)
     console.log(`computer: ${computerSelection}`)
     if (playerSelection === computerSelection) {
         roundWinner = 'Tie'
+        player_choice.innerHTML = roundWinner
         console.log(roundWinner)
     } else if (
         (playerSelection === 'rock' && computerSelection === 'scissors') ||
@@ -23,7 +38,10 @@ function playround(playerSelection, computerSelection) {
     ) {
         playerScore++
         roundWinner = 'player wins!'
+        player_choice.innerHTML = roundWinner
         console.log(roundWinner)
+        console.log(`player-score: ${playerScore}`)
+        playerResult.innerHTML = `<p>You: ${playerScore}</p>`
     } else if (
         (computerSelection === 'rock' && playerSelection === 'scissors') ||
         (computerSelection === 'scissors' && playerSelection === 'paper') ||
@@ -31,25 +49,69 @@ function playround(playerSelection, computerSelection) {
     ) {
         computerScore++
         roundWinner = 'computer wins!'
+        player_choice.innerHTML = roundWinner
         console.log(roundWinner)
+        console.log(`computer-score: ${computerScore}`)
+        computerResult.innerHTML = `<p>Computer: ${computerScore}</p>`
     }
 }
 
-const playerSelection = prompt('Enter value')
-const computerSelection = getComputerChoice(options)
-console.log(playround(playerSelection, computerSelection))
 
-//figure out how to create the rounds
-function game(playerSelection, computerSelection) {
-    //write code to loop 5 times to make a round 
-    //if the playerScore > computerScore declare player the winner else the computer
-    let i = 0
-    do {
-        const playerSelection = prompt('Enter value')
-        const computerSelection = getComputerChoice(options)
-        playround(playerSelection, computerSelection)
-        i++;
+let playerSelection;
+
+// let computerSelection = getComputerChoice(options)
+// console.log(playround(playerSelection, computerSelection))
+
+// playGame(playerSelection, computerSelection)
+
+function roundScore() {
+    if (computerScore === 5 || playerChoice === 5) {
+        if (playerScore > computerScore) {
+            console.log('The player wins this round!')
+            resultMessage.innerHTML = 'The player wins this round!'
+        } else if (playerScore < computerScore) {
+            console.log('Ai is taking over very soon 🙂')
+            resultMessage.innerHTML = 'Ai is taking over very soon 🙂'
+        } else if (computerScore === playerScore) {
+            console.log('Tie 👔')
+            resultMessage.innerHTML = "It's a Tie 👔"
+        }
     }
-    while (i < 5)
 }
-game(playerSelection, computerSelection)
+
+function playerChoice(e) {
+    let playerSelection = (e.target.id);
+    playerChoice = e.target.textContent;
+    playround(playerSelection, getComputerChoice(options));
+    roundScore()
+}
+
+
+//need to loose the loop and try again
+// function game(playerSelection, computerSelection) {
+//     let i = 0
+//     do {
+//         const playerSelection = playerChoice()
+//         const computerSelection = getComputerChoice(options)
+
+//         if (roundWinner === 'computer wins!') {
+//             playerScore++
+//         } else if (roundWinner === 'player wins!') {
+//             computerScore++
+//         }
+//         playround(playerSelection, computerSelection)
+//         i++;
+//     }
+//     while (i < 5)
+//     if (playerScore > computerScore) {
+//         console.log('The player wins this round!')
+//         resultMessage.innerHTML = 'The player wins this round!'
+//     } else if (computerScore > playerScore) {
+//         console.log('Ai is taking over very soon 🙂')
+//         resultMessage.innerHTML = 'Ai is taking over very soon 🙂'
+//     } else if (computerScore === playerScore) {
+//         console.log('Tie 👔')
+//         resultMessage.innerHTML = "It's a Tie 👔"
+//     }
+// }
+// game(playerSelection, computerSelection)
