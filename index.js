@@ -3,6 +3,8 @@
 // const scissorsBtn = document.getElementById('scissors')
 const btn = document.querySelectorAll('button')
 const resultMessage = document.getElementById('round-result')
+const playerResult = document.getElementById('player-score')
+const computerResult = document.getElementById('computer-score')
 
 let options = ['rock', 'paper', 'scissors']
 let playerScore = 0;
@@ -17,14 +19,8 @@ function getComputerChoice(arr) {
 
 
 //write a function to handle playerchoice
-function playerChoice() {
-    btn.forEach((button) => {
-        button.addEventListener('click', (e) => {
-            console.log(button.value)
-            return button.value
-        })
-    })
-}
+btn.forEach(button => { button.addEventListener('click', playerChoice) })
+
 
 function playround(playerSelection, computerSelection) {
     //work on it here
@@ -52,32 +48,27 @@ function playround(playerSelection, computerSelection) {
     }
 }
 
-const playerSelection = playerChoice()
-const computerSelection = getComputerChoice(options)
-console.log(playround(playerSelection, computerSelection))
 
+let playerSelection;
 
-
-
-//figure out how to create the rounds --- done
-function game(playerSelection, computerSelection) {
-    //write code to loop 5 times to make a round --- done
-    //if the playerScore > computerScore declare player the winner else the computer --- done 
-    let i = 0
-    do {
-        let playerSelection = playerChoice()
-        const computerSelection = getComputerChoice(options)
-        if (roundWinner === 'computer wins!') {
-            playerScore++
-        } else if (roundWinner === 'player wins!') {
-            computerScore++
-        }
-        playround(playerSelection, computerSelection)
-        i++;
+function playGame() {
+    if (roundWinner === 'computer wins!') {
+        playerScore++
+        playerResult.innerHTML = playerScore;
+        console.log(`player: ${playerScore}`)
+    } else if (roundWinner === 'player wins!') {
+        computerScore++
+        computerResult.innerHTML = computerScore;
+        console.log(`computer: ${computerScore}`)
     }
-    while (i < 5)
-    console.log(`Player score: ${playerScore}`)
-    console.log(`Computer score: ${computerScore}`)
+}
+playGame()
+// let computerSelection = getComputerChoice(options)
+// console.log(playround(playerSelection, computerSelection))
+
+// playGame(playerSelection, computerSelection)
+
+function roundScore() {
     if (playerScore > computerScore) {
         console.log('The player wins this round!')
         resultMessage.innerHTML = 'The player wins this round!'
@@ -89,4 +80,40 @@ function game(playerSelection, computerSelection) {
         resultMessage.innerHTML = "It's a Tie 👔"
     }
 }
-game(playerSelection, computerSelection)
+roundScore()
+
+function playerChoice(e) {
+    let playerSelection= (e.target.id);
+    playerChoice = e.target.textContent;
+    playround(playerSelection, getComputerChoice(options));
+}
+
+
+//need to loose the loop and try again
+// function game(playerSelection, computerSelection) {
+//     let i = 0
+//     do {
+//         const playerSelection = playerChoice()
+//         const computerSelection = getComputerChoice(options)
+
+//         if (roundWinner === 'computer wins!') {
+//             playerScore++
+//         } else if (roundWinner === 'player wins!') {
+//             computerScore++
+//         }
+//         playround(playerSelection, computerSelection)
+//         i++;
+//     }
+//     while (i < 5)
+//     if (playerScore > computerScore) {
+//         console.log('The player wins this round!')
+//         resultMessage.innerHTML = 'The player wins this round!'
+//     } else if (computerScore > playerScore) {
+//         console.log('Ai is taking over very soon 🙂')
+//         resultMessage.innerHTML = 'Ai is taking over very soon 🙂'
+//     } else if (computerScore === playerScore) {
+//         console.log('Tie 👔')
+//         resultMessage.innerHTML = "It's a Tie 👔"
+//     }
+// }
+// game(playerSelection, computerSelection)
