@@ -27,3 +27,12 @@ h1 {
     font-size: 20px;
     cursor: pointer;
 }
+
+.round-winner {
+    text-align: center;
+    border: 1px solid salmon;
+    margin: auto;
+    width: fit-content;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
